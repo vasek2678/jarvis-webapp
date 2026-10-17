@@ -12,130 +12,177 @@
             --card-bg: var(--tg-theme-secondary-bg-color, #1c1c1e);
             --accent: var(--tg-theme-button-color, #0a84ff);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); padding-bottom: 70px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); padding-bottom: 80px; }
         
-        /* Шапка */
-        .header { padding: 20px; text-align: center; background: var(--card-bg); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 10; }
+        .header { padding: 15px; text-align: center; background: var(--card-bg); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 10; font-weight: bold; font-size: 18px; }
         
-        /* Контейнеры вкладок */
-        .tab-content { display: none; padding: 20px; animation: fadeIn 0.3s ease; }
+        .tab-content { display: none; padding: 15px; animation: fadeIn 0.2s ease; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Элементы UI */
-        .card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        h3 { margin-bottom: 15px; font-size: 18px; }
-        button { background: var(--accent); color: #fff; border: none; padding: 14px 20px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
+        .card { background: var(--card-bg); border-radius: 14px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        h3 { margin-bottom: 12px; font-size: 16px; color: var(--accent); }
+        
+        button { background: var(--accent); color: #fff; border: none; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; margin-bottom: 8px; transition: 0.2s; }
         button:active { transform: scale(0.97); opacity: 0.8; }
-        select, textarea, input { width: 100%; padding: 12px; background: var(--bg); color: var(--text); border: 1px solid #444; border-radius: 10px; margin-bottom: 15px; font-size: 16px; }
-        textarea { resize: vertical; min-height: 100px; }
-
-        /* Чат с ИИ */
-        .chat-box { height: 350px; overflow-y: auto; background: var(--bg); border-radius: 10px; padding: 10px; margin-bottom: 15px; border: 1px solid #333; }
-        .msg { padding: 10px 14px; border-radius: 14px; margin-bottom: 10px; max-width: 85%; line-height: 1.4; }
-        .msg.user { background: var(--accent); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
-        .msg.ai { background: var(--card-bg); border: 1px solid #444; margin-right: auto; border-bottom-left-radius: 4px; }
-        .chat-input-row { display: flex; gap: 10px; }
+        .btn-half { width: 48%; display: inline-block; }
+        
+        select, textarea, input { width: 100%; padding: 10px; background: var(--bg); color: var(--text); border: 1px solid #444; border-radius: 8px; margin-bottom: 10px; font-size: 14px; }
+        
+        .chat-box { height: 300px; overflow-y: auto; background: var(--bg); border-radius: 10px; padding: 10px; margin-bottom: 10px; border: 1px solid #333; }
+        .msg { padding: 10px; border-radius: 12px; margin-bottom: 8px; max-width: 85%; font-size: 14px; line-height: 1.4; }
+        .msg.user { background: var(--accent); color: #fff; margin-left: auto; border-bottom-right-radius: 2px; }
+        .msg.ai { background: var(--card-bg); border: 1px solid #444; margin-right: auto; border-bottom-left-radius: 2px; }
+        .msg img { width: 100%; border-radius: 8px; margin-top: 5px; }
+        
+        .chat-input-row { display: flex; gap: 8px; }
         .chat-input-row input { margin-bottom: 0; }
-        .chat-input-row button { width: auto; margin-bottom: 0; padding: 0 20px; }
+        .chat-input-row button { width: 50px; margin-bottom: 0; padding: 0; }
 
-        /* Нижнее меню (Навигация) */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; z-index: 100; }
-        .nav-item { color: #888; text-align: center; font-size: 12px; cursor: pointer; width: 33%; padding: 5px; transition: 0.2s; }
-        .nav-item.active { color: var(--accent); font-weight: bold; }
-        .nav-icon { font-size: 24px; margin-bottom: 3px; display: block; }
+        .chips-scroll { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 5px; margin-bottom: 10px; scrollbar-width: none; }
+        .chips-scroll::-webkit-scrollbar { display: none; }
+        .chip { background: #333; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; white-space: nowrap; cursor: pointer; border: 1px solid #555; }
+
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--card-bg); display: flex; justify-content: space-around; padding: 10px 0 15px 0; border-top: 1px solid #333; z-index: 100; }
+        .nav-item { color: #888; text-align: center; font-size: 11px; width: 33%; cursor: pointer; transition: 0.2s; }
+        .nav-item.active { color: var(--accent); }
+        .nav-icon { font-size: 22px; display: block; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h2 id="userName">Джарвис OS</h2>
-    </div>
+    <div class="header" id="userName">Джарвис OS</div>
 
-    <!-- ВКЛАДКА 1: ЧАТ С ИИ -->
+    <!-- ВКЛАДКА 1: ИИ и УТИЛИТЫ -->
     <div id="tab-chat" class="tab-content active">
         <div class="card">
-            <h3>Встроенный ИИ</h3>
+            <div class="chips-scroll">
+                <div class="chip" onclick="quickPrompt('Нарисуй: Киберпанк город')">🎨 Нарисовать</div>
+                <div class="chip" onclick="quickPrompt('Прогноз и цена крипты: Биткоин')">📈 Крипта</div>
+                <div class="chip" onclick="quickPrompt('Придумай 5 идей для подарка: другу')">🎁 Подарки</div>
+                <div class="chip" onclick="quickPrompt('Объясни как 5-летнему: черные дыры')">👶 Объясни просто</div>
+                <div class="chip" onclick="quickPrompt('Что посмотреть похожее на: Интерстеллар')">🍿 Фильмы</div>
+            </div>
+            
             <div class="chat-box" id="chatBox">
-                <div class="msg ai">Привет! Я Джарвис. О чем пообщаемся прямо здесь?</div>
+                <div class="msg ai">Привет! Напиши мне или выбери быструю команду сверху. Если попросишь "Нарисуй: [что-то]", я сгенерирую картинку прямо здесь!</div>
             </div>
             <div class="chat-input-row">
-                <input type="text" id="aiInput" placeholder="Напиши сообщение...">
+                <input type="text" id="aiInput" placeholder="Запрос к ИИ...">
                 <button onclick="sendToAI()">➤</button>
             </div>
         </div>
     </div>
 
-    <!-- ВКЛАДКА 2: РАСПИСАНИЕ -->
-    <div id="tab-schedule" class="tab-content">
+    <!-- ВКЛАДКА 2: УЧЕБА -->
+    <div id="tab-study" class="tab-content">
         <div class="card">
-            <h3>Изменить расписание</h3>
-            <label>Выбери день:</label>
-            <select id="schDay">
-                <option value="0">Понедельник</option>
-                <option value="1">Вторник</option>
-                <option value="2">Среда</option>
-                <option value="3">Четверг</option>
-                <option value="4">Пятница</option>
-                <option value="5">Суббота</option>
-            </select>
-            
-            <label>Уроки (каждый с новой строки):</label>
-            <textarea id="schLessons" placeholder="1. Алгебра&#10;2. Физика..."></textarea>
-            
-            <label>Допы / Тренировки:</label>
-            <input type="text" id="schExtra" placeholder="Например: Репетитор в 18:00">
-            
-            <button onclick="saveSchedule()">💾 Сохранить и закрыть</button>
+            <h3>📅 Изменить расписание</h3>
+            <select id="schDay"><option value="0">Пн</option><option value="1">Вт</option><option value="2">Ср</option><option value="3">Чт</option><option value="4">Пт</option><option value="5">Сб</option></select>
+            <textarea id="schLessons" placeholder="Уроки (каждый с новой строки)"></textarea>
+            <input type="text" id="schExtra" placeholder="Допы (например: Репетитор в 18:00)">
+            <button onclick="sendData({action: 'update_schedule', day: val('schDay'), lessons: val('schLessons'), extra: val('schExtra')})">💾 Сохранить день</button>
+        </div>
+        <div class="card">
+            <h3>📚 Добавить ДЗ</h3>
+            <input type="text" id="hwSubj" placeholder="Предмет (Физика)">
+            <input type="text" id="hwTask" placeholder="Задание (Параграф 5)">
+            <button onclick="sendData({action: 'add_hw', subj: val('hwSubj'), task: val('hwTask')})">📝 Записать ДЗ</button>
+        </div>
+        <div class="card">
+            <h3>📊 Добавить оценку</h3>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="grSubj" placeholder="Предмет" style="width: 70%;">
+                <input type="number" id="grMark" placeholder="Оценка" style="width: 30%;">
+            </div>
+            <button onclick="sendData({action: 'add_grade', subj: val('grSubj'), mark: val('grMark')})">📈 Записать оценку</button>
         </div>
     </div>
 
-    <!-- ВКЛАДКА 3: БЫСТРЫЕ ДЕЙСТВИЯ -->
-    <div id="tab-tools" class="tab-content">
-        <div class="card">
-            <h3>Трекеры</h3>
-            <button onclick="sendActionToBot('water')">💧 Выпил стакан воды</button>
-            <button style="background: #8b5a2b;" onclick="sendActionToBot('coffee')">☕️ Выпил кофе</button>
+    <!-- ВКЛАДКА 3: ЖИЗНЬ -->
+    <div id="tab-life" class="tab-content">
+        <!-- НОВЫЙ БЛОК: ПРОФИЛЬ И НАСТРОЙКИ -->
+        <div class="card" style="border: 1px solid var(--accent);">
+            <h3>👤 Профиль и Настройки</h3>
+            <button onclick="sendData({action: 'profile'})">🏆 Показать мой профиль</button>
+            <button style="background: #ff3b30;" onclick="sendData({action: 'toggle_notifications'})">🔕 Вкл / Выкл рассылку</button>
+            
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <div style="width: 50%;">
+                    <label style="font-size: 12px; color: #888;">Утро:</label>
+                    <input type="time" id="cfgMorn" value="07:00">
+                </div>
+                <div style="width: 50%;">
+                    <label style="font-size: 12px; color: #888;">Вечер:</label>
+                    <input type="time" id="cfgAft" value="15:00">
+                </div>
+            </div>
+            <button style="background: #5ac8fa; color: #000;" onclick="sendData({action: 'set_times', morn: val('cfgMorn'), aft: val('cfgAft')})">⏰ Сохранить время сводок</button>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h3>Трекеры привычек</h3>
+            <button class="btn-half" onclick="sendData({action: 'water'})">💧 Вода</button>
+            <button class="btn-half" style="background: #8b5a2b;" onclick="sendData({action: 'coffee'})">☕️ Кофе</button>
         </div>
         <div class="card">
-            <h3>Финансы</h3>
-            <input type="number" id="spendAmount" placeholder="Сумма (например: 150)">
-            <input type="text" id="spendDesc" placeholder="На что? (например: Обед)">
-            <button style="background: #28a745;" onclick="saveSpend()">💸 Записать трату</button>
+            <h3>💸 Финансы (Трата)</h3>
+            <div style="display: flex; gap: 10px;">
+                <input type="number" id="spAmt" placeholder="Сумма" style="width: 40%;">
+                <input type="text" id="spDesc" placeholder="На что?" style="width: 60%;">
+            </div>
+            <button style="background: #28a745;" onclick="sendData({action: 'add_spend', amount: val('spAmt'), desc: val('spDesc')})">Записать трату</button>
+        </div>
+        <div class="card">
+            <h3>🔔 Напоминание</h3>
+            <div style="display: flex; gap: 10px;">
+                <input type="time" id="remTime" style="width: 40%;">
+                <input type="text" id="remText" placeholder="Текст" style="width: 60%;">
+            </div>
+            <button style="background: #ff9500;" onclick="sendData({action: 'add_reminder', time: val('remTime'), text: val('remText')})">Создать напоминание</button>
+        </div>
+        <div class="card">
+            <h3>📝 Новая заметка</h3>
+            <textarea id="noteText" placeholder="Текст заметки..."></textarea>
+            <button style="background: #8e8e93;" onclick="sendData({action: 'add_note', text: val('noteText')})">Сохранить в базу</button>
         </div>
     </div>
 
-    <!-- НИЖНЕЕ МЕНЮ НАВИГАЦИИ -->
+    <!-- НАВИГАЦИЯ -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('chat', this)">
-            <span class="nav-icon">💬</span> ИИ Чат
-        </div>
-        <div class="nav-item" onclick="switchTab('schedule', this)">
-            <span class="nav-icon">📅</span> Расписание
-        </div>
-        <div class="nav-item" onclick="switchTab('tools', this)">
-            <span class="nav-icon">⚙️</span> Панель
-        </div>
+        <div class="nav-item active" onclick="switchTab('chat', this)"><span class="nav-icon">💬</span>ИИ Чат</div>
+        <div class="nav-item" onclick="switchTab('study', this)"><span class="nav-icon">🎓</span>Учеба</div>
+        <div class="nav-item" onclick="switchTab('life', this)"><span class="nav-icon">⚙️</span>Жизнь</div>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
-        if (tg.initDataUnsafe?.user) document.getElementById('userName').innerText = `Система ${tg.initDataUnsafe.user.first_name}`;
+        if (tg.initDataUnsafe?.user) document.getElementById('userName').innerText = `OS ${tg.initDataUnsafe.user.first_name}`;
 
-        // Навигация по вкладкам
-        function switchTab(tabId, element) {
+        function switchTab(tabId, el) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
-            element.classList.add('active');
+            el.classList.add('active');
         }
 
-        // ВСТАВЬ СЮДА СВОЙ КЛЮЧ GEMINI ДЛЯ ЧАТА НА САЙТЕ
-        const GEMINI_KEY = "ВСТАВЬ_КЛЮЧ_СЮДА"; 
+        const val = (id) => document.getElementById(id).value;
+        
+        function sendData(dataObj) {
+            tg.sendData(JSON.stringify(dataObj));
+            tg.close();
+        }
 
-        // Логика встроенного ИИ (работает без закрытия сайта)
+        // ВСТАВЬ СВОЙ КЛЮЧ ОТ GEMINI СЮДА:
+        const GEMINI_KEY = "AQ.Ab8RN6L2F9xIm3jdCPJY0F3vUZSirML-ufriLryG-4kDr685Ng"; 
+
+        function quickPrompt(text) {
+            document.getElementById('aiInput').value = text;
+            sendToAI();
+        }
+
         async function sendToAI() {
             const inputField = document.getElementById('aiInput');
             const text = inputField.value.trim();
@@ -146,48 +193,28 @@
             inputField.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
+            if (text.toLowerCase().startsWith('нарисуй')) {
+                const promptEn = encodeURIComponent(text);
+                const imgUrl = `https://image.pollinations.ai/prompt/${promptEn}?width=800&height=800&nologo=true`;
+                chatBox.innerHTML += `<div class="msg ai"><img src="${imgUrl}" onload="document.getElementById('chatBox').scrollTop = 9999"></div>`;
+                return;
+            }
+
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: text }] }] })
+                    body: JSON.stringify({ contents: [{ parts: [{ text: "Ответь кратко и емко. " + text }] }] })
                 });
                 const data = await response.json();
-                const aiText = data.candidates[0].content.parts[0].text;
+                let aiText = data.candidates[0].content.parts[0].text;
+                aiText = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>').replace(/\n/g, '<br>');
                 
                 chatBox.innerHTML += `<div class="msg ai">${aiText}</div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
             } catch (err) {
-                chatBox.innerHTML += `<div class="msg ai">❌ Ошибка связи с API Гугла. Проверь ключ в HTML-коде.</div>`;
+                chatBox.innerHTML += `<div class="msg ai">❌ Ошибка связи с ИИ.</div>`;
             }
-        }
-
-        // Логика передачи данных в Питон-бота
-        function sendActionToBot(actionType) {
-            // Формируем красивый JSON и отправляем в ТГ
-            const data = { action: actionType };
-            tg.sendData(JSON.stringify(data)); 
-            tg.close();
-        }
-
-        function saveSchedule() {
-            const day = document.getElementById('schDay').value;
-            const lessons = document.getElementById('schLessons').value;
-            const extra = document.getElementById('schExtra').value;
-            
-            const data = { action: 'update_schedule', day: day, lessons: lessons, extra: extra };
-            tg.sendData(JSON.stringify(data));
-            tg.close();
-        }
-
-        function saveSpend() {
-            const amt = document.getElementById('spendAmount').value;
-            const desc = document.getElementById('spendDesc').value;
-            if(!amt || !desc) return alert("Заполни сумму и описание!");
-            
-            const data = { action: 'add_spend', amount: amt, desc: desc };
-            tg.sendData(JSON.stringify(data));
-            tg.close();
         }
     </script>
 </body>
