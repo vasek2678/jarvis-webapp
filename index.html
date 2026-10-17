@@ -66,7 +66,7 @@
             </div>
             
             <div class="chat-box" id="chatBox">
-                <div class="msg ai">Привет! Напиши мне или выбери быструю команду сверху. Если попросишь "Нарисуй: [что-то]", я сгенерирую картинку прямо здесь!</div>
+                <div class="msg ai">Привет! Напиши мне или выбери быструю команду сверху.</div>
             </div>
             <div class="chat-input-row">
                 <input type="text" id="aiInput" placeholder="Запрос к ИИ...">
@@ -77,6 +77,12 @@
 
     <!-- ВКЛАДКА 2: УЧЕБА -->
     <div id="tab-study" class="tab-content">
+        <div class="card">
+            <h3>📖 Мои данные (Посмотреть)</h3>
+            <button class="btn-half" onclick="sendData({action: 'view_hw'})">📚 Посмотреть ДЗ</button>
+            <button class="btn-half" onclick="sendData({action: 'view_grades'})">📊 Мои оценки</button>
+            <button style="background: #ff3b30;" onclick="sendData({action: 'del_grade_info'})">🗑 Как удалить оценку?</button>
+        </div>
         <div class="card">
             <h3>📅 Изменить расписание</h3>
             <select id="schDay"><option value="0">Пн</option><option value="1">Вт</option><option value="2">Ср</option><option value="3">Чт</option><option value="4">Пт</option><option value="5">Сб</option></select>
@@ -102,7 +108,6 @@
 
     <!-- ВКЛАДКА 3: ЖИЗНЬ -->
     <div id="tab-life" class="tab-content">
-        <!-- НОВЫЙ БЛОК: ПРОФИЛЬ И НАСТРОЙКИ -->
         <div class="card" style="border: 1px solid var(--accent);">
             <h3>👤 Профиль и Настройки</h3>
             <button onclick="sendData({action: 'profile'})">🏆 Показать мой профиль</button>
@@ -118,7 +123,18 @@
                     <input type="time" id="cfgAft" value="15:00">
                 </div>
             </div>
-            <button style="background: #5ac8fa; color: #000;" onclick="sendData({action: 'set_times', morn: val('cfgMorn'), aft: val('cfgAft')})">⏰ Сохранить время сводок</button>
+            <button style="background: #5ac8fa; color: #000;" onclick="sendData({action: 'set_times', morn: val('cfgMorn'), aft: val('cfgAft')})">⏰ Сохранить время</button>
+        </div>
+
+        <div class="card">
+            <h3>📦 Карты и Списки</h3>
+            <button onclick="sendData({action: 'get_card'})">💳 Мои скидочные карты</button>
+            <button class="btn-half" onclick="sendData({action: 'view_reminders'})">🔔 Напоминания</button>
+            <button class="btn-half" onclick="sendData({action: 'view_notes'})">📝 Заметки</button>
+            <div style="margin-top: 10px;">
+                <button class="btn-half" style="background: #ff3b30; font-size: 12px;" onclick="sendData({action: 'clear_reminders'})">Удалить напоминания</button>
+                <button class="btn-half" style="background: #ff3b30; font-size: 12px;" onclick="sendData({action: 'clear_notes'})">Удалить заметки</button>
+            </div>
         </div>
 
         <div class="card" style="text-align: center;">
@@ -140,12 +156,12 @@
                 <input type="time" id="remTime" style="width: 40%;">
                 <input type="text" id="remText" placeholder="Текст" style="width: 60%;">
             </div>
-            <button style="background: #ff9500;" onclick="sendData({action: 'add_reminder', time: val('remTime'), text: val('remText')})">Создать напоминание</button>
+            <button style="background: #ff9500;" onclick="sendData({action: 'add_reminder', time: val('remTime'), text: val('remText')})">Создать</button>
         </div>
         <div class="card">
             <h3>📝 Новая заметка</h3>
             <textarea id="noteText" placeholder="Текст заметки..."></textarea>
-            <button style="background: #8e8e93;" onclick="sendData({action: 'add_note', text: val('noteText')})">Сохранить в базу</button>
+            <button style="background: #8e8e93;" onclick="sendData({action: 'add_note', text: val('noteText')})">Сохранить</button>
         </div>
     </div>
 
