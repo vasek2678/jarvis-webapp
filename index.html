@@ -186,9 +186,17 @@
 
         const val = (id) => document.getElementById(id).value;
         
+        // НОВЫЙ БРОНЕБОЙНЫЙ МЕТОД ОТПРАВКИ ДАННЫХ
         function sendData(dataObj) {
-            tg.sendData(JSON.stringify(dataObj));
-            tg.close();
+            try {
+                // Легкая вибрация, чтобы чувствовать нажатие
+                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+                
+                // Отправляем JSON (Телеграм сам закроет окно!)
+                tg.sendData(JSON.stringify(dataObj));
+            } catch (err) {
+                alert("⚠️ Ошибка: " + err.message + "\n\nСкорее всего, панель открыта не через кнопку внизу чата. Переоткрой её правильно!");
+            }
         }
 
         // ВСТАВЬ СВОЙ КЛЮЧ ОТ GEMINI СЮДА:
@@ -229,7 +237,7 @@
                 chatBox.innerHTML += `<div class="msg ai">${aiText}</div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
             } catch (err) {
-                chatBox.innerHTML += `<div class="msg ai">❌ Ошибка связи с ИИ.</div>`;
+                chatBox.innerHTML += `<div class="msg ai">❌ Ошибка связи с ИИ. Проверь ключ.</div>`;
             }
         }
     </script>
